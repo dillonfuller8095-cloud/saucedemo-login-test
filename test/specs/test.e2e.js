@@ -8,17 +8,16 @@ describe('Dillon SauceDemo Test', () => {
         await LoginPage.open()
         await LoginPage.loginToApp('standard_user', 'secret_sauce')
 
-        await expect(browser).toHaveUrlContaining('inventory')
+        await expect(browser).toHaveUrl('https://www.saucedemo.com/inventory.html')
 
     })
 
-    // 👇 ADD IT RIGHT HERE
     it('should NOT login with bad credentials', async () => {
 
         await LoginPage.open()
-        await LoginPage.loginToApp('locked_out_user', 'wrong_password')
+        await LoginPage.loginToApp('standard_user', 'wrong_password')
 
-        const error = await $('.error-message-container')
+        const error = await $('[data-test="error"]')
         await expect(error).toBeDisplayed()
 
     })
